@@ -14,21 +14,22 @@ SCREEN_HEIGHT = 600
 MARGIN = 30
 SCREEN_TITLE = "Particle Exercise"
 
-PARTICLE_MIN_SCALE = 0.05
-PARTICLE_MAX_SCALE = 0.1
+PARTICLE_MIN_SCALE = 0.1
+PARTICLE_MAX_SCALE = 0.3
 PARTICLE_MIN_X = -5
 PARTICLE_MAX_X = 5
 PARTICLE_MIN_Y = -5
 PARTICLE_MAX_Y = 5
-PARTICLE_VELOCITY_X = 0
-PARTICLE_MAX_VELOCITY_Y = 2
-PARTICLE_MIN_VELOCITY_Y = 0
+PARTICLE_MIN_VELOCITY_X = -0.1
+PARTICLE_MAX_VELOCITY_X = .1
+PARTICLE_MIN_VELOCITY_Y = 0.5
+PARTICLE_MAX_VELOCITY_Y = 1.5
 PARTICLE_MIN_AX = 0
 PARTICLE_MAX_AX = 0.001
 PARTICLE_MIN_AY = 0
 PARTICLE_MAX_AY = 0.001
-PARTICLE_MIN_DECAY = 0.01
-PARTICLE_MAX_DECAY = 0.1
+PARTICLE_MIN_DECAY = 0.001
+PARTICLE_MAX_DECAY = 0.01
 
 
 class Particle(arcade.Sprite):
@@ -44,16 +45,10 @@ class Particle(arcade.Sprite):
         self.color_pos = 0
 
         self.particle_colors = [
-            (open_color.gray_1, 8)
-            ,(open_color.gray_2, 7)
-            ,(open_color.gray_3, 6)
-            ,(open_color.gray_3, 7)
+            (open_color.gray_2, 4)
+            ,(open_color.gray_3, 4)
             ,(open_color.gray_4, 8)
-            ,(open_color.blue_3, 8)
-            ,(open_color.teal_2, 7)
-            ,(open_color.teal_3, 6)
-            ,(open_color.teal_4, 5)
-            ,(open_color.teal_5, 4)
+            ,(open_color.gray_5, 10)
         ]
         (self.color, self.lifetime) = self.particle_colors[self.color_pos]
         self.alive = True
@@ -106,14 +101,14 @@ class Window(arcade.Window):
             #generate a new particle
             x = self.x + random.uniform(PARTICLE_MIN_X, PARTICLE_MAX_X)
             y = self.y + random.uniform(PARTICLE_MIN_Y, PARTICLE_MAX_Y)
-            dx = PARTICLE_VELOCITY_X
+            dx = random.uniform(PARTICLE_MIN_VELOCITY_X,PARTICLE_MAX_VELOCITY_X)
             dy = random.uniform(PARTICLE_MAX_VELOCITY_Y,PARTICLE_MIN_VELOCITY_Y)
             ax = random.uniform(PARTICLE_MIN_AX,PARTICLE_MAX_AX)
             ay = random.uniform(PARTICLE_MIN_AY,PARTICLE_MAX_AY)
             decay = random.uniform(PARTICLE_MIN_DECAY,PARTICLE_MAX_DECAY)
             scale = random.uniform(PARTICLE_MIN_SCALE,PARTICLE_MAX_SCALE)
             #Particle(asset, sprite scale, initial position [x], initial position [y], velocity [x], velocity [y], acceleration [x], acceleration [y], scale decay)
-            particle = Particle('flame_04',scale,x,y,dx,dy,ax,ay,decay)
+            particle = Particle('smoke_03',scale,x,y,dx,dy,ax,ay,decay)
 
             self.particle_list.append(particle)
 
